@@ -167,7 +167,7 @@ Remark: Note that the /consents endpoint optionally offers to grant an access on
 | PSU-Accept-Language	| header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID	| header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | 	regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$
-| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$
+| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP ddress field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent	| header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -298,7 +298,7 @@ Give detailed information about the addressed account together with balance info
 | PSU-Accept-Language	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID	| header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$
+| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -444,24 +444,19 @@ The account-id is constant at least throughout the lifecycle of a given consent.
 | Consent-ID | header | This then contains the consentId of the related AIS consent, which was performed prior to accessing this account. | required |
 | Digest | header | Is contained if and only if the "Signature" element is contained in the header of the request. |
 | PSU-Accept	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Charset	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Encoding	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Language	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Device-ID	 | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
-| PSU-Geo-Location	 | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method	 | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
-| PSU-IP-Address	 | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
-| PSU-IP-Port	 | header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
-| PSU-User-Agent	 | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
+| PSU-Accept-Charset | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Accept-Encoding | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
+| PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
+| PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
+| PSU-IP-Port | header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
+| PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
-| TPP-Signature-Certificate	 | header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
-| X-Request-ID	 | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
-| account-id	 | path | This identification is denoting the addressed account. The account-id is retrieved by using a "Read Account List" call. The account-id is the "id" attribute of the account structure. Its value is constant at least throughout the lifecycle of a given consent. | required |
+| TPP-Signature-Certificate | header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
+| X-Request-ID | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
+| account-id | path | This identification is denoting the addressed account. The account-id is retrieved by using a "Read Account List" call. The account-id is the "id" attribute of the account structure. Its value is constant at least throughout the lifecycle of a given consent. | required |
 
 
 **Response Codes**
@@ -729,56 +724,38 @@ For a given account, additional parameters are e.g. the attributes "dateFrom" an
 
 | name | type | description | constraints |
 | ---- | ---- | ----------- | ----------- |
-| Accept | header | The TPP can indicate the formats of account reports supported together with a priorisation following the HTTP header definition. The formats supported by this specification are
-  * xml
-  * JSON
-  * text
-Remark: Content types might be extended in the next version of the specification. This shall enable the TPP to address different camt.05x versions or different MT94x versions in a corporate context. The TPP then could e.g. say: "I prefer MT942, but take MT940 if MT942 is not available." |
+| Accept | header | The TPP can indicate the formats of account reports supported together with a priorisation following the HTTP header definition. The formats supported by this specification are **xml** **JSON** **text** Remark: Content types might be extended in the next version of the specification. This shall enable the TPP to address different camt.05x versions or different MT94x versions in a corporate context. The TPP then could e.g. say: "I prefer MT942, but take MT940 if MT942 is not available." | |
 | Consent-ID | header | This then contains the consentId of the related AIS consent, which was performed prior to accessing this account. | required |
 | Digest | header | Is contained if and only if the "Signature" element is contained in the header of the request. |
-| PSU-Accept	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Charset	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Encoding	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Accept-Language	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
-| PSU-Device-ID	 | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
-| PSU-Geo-Location	 | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method	 | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
-| PSU-IP-Address	 | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
-| PSU-IP-Port	 | header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
-| PSU-User-Agent	 | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
+| PSU-Accept | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Accept-Charset | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Accept-Encoding	| header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
+| PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
+| PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
+| PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
+| PSU-IP-Port | header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
+| PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
 | TPP-Signature-Certificate	 | header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
-| X-Request-ID	 | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
-| account-id	 | path | This identification is denoting the addressed account. The account-id is retrieved by using a "Read Account List" call. The account-id is the "id" attribute of the account structure. Its value is constant at least throughout the lifecycle of a given consent. | required |
+| X-Request-ID | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
+| account-id | path | This identification is denoting the addressed account. The account-id is retrieved by using a "Read Account List" call. The account-id is the "id" attribute of the account structure. Its value is constant at least throughout the lifecycle of a given consent. | required |
 | bookingStatus | query | Permitted codes are "booked", "pending", "both" and "information".
-
 "booked" shall be supported by the ASPSP.
-
 To support the "pending" and "both" feature is optional for the ASPSP, Error code if not supported in the online banking frontend. If supported, "both" means to request transaction reports of transaction of bookingStatus either "pending" or "booked".
-
-To support the "information" feature is optional for the ASPSP. Currently the booking status "information" only covers standing orders. Error code if not supported. | required
+To support the "information" feature is optional for the ASPSP. Currently the booking status "information" only covers standing orders. Error code if not supported. | required |
 | dateFrom | query | Conditional: Starting date (inclusive the date dateFrom) of the transaction list, mandated if no delta access is required.
-
 For booked transactions, the relevant date is the booking date.
-
 For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
 | dateTo | query | End date (inclusive the data dateTo) of the transaction list, default is "now" if not given.
-
 Might be ignored if a delta function is used.
-
 For booked transactions, the relevant date is the booking date.
-
 For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
 | deltaList | query | This data attribute is indicating that the AISP is in favor to get all transactions after the last report access for this PSU on the addressed account. This is another implementation of a delta access-report. This delta indicator might be rejected by the ASPSP if this function is not supported. Optional if supported by API provider. | boolean |
 | entryReferenceFrom | query | This data attribute is indicating that the AISP is in favor to get all transactions after the transaction with identification entryReferenceFrom alternatively to the above defined period. This is a implementation of a delta access. If this data element is contained, the entries "dateFrom" and "dateTo" might be ignored by the ASPSP if a delta report is supported.
-
 Optional if supported by API provider. |
-| withBalance | query | If contained, this function reads the list of accessible payment accounts including the booking balance, if granted by the PSU in the related consent and available by the ASPSP. This parameter might be ignored by the ASPSP. | boolean
+| withBalance | query | If contained, this function reads the list of accessible payment accounts including the booking balance, if granted by the PSU in the related consent and available by the ASPSP. This parameter might be ignored by the ASPSP. | boolean |
 
 
 **Response Codes**
