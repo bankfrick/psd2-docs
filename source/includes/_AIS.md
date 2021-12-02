@@ -178,8 +178,8 @@ Remark: Note that the /consents endpoint optionally offers to grant an access on
 
 **Response Codes**
 
-| code | condition | type |
-| ---- | --------- | ---- |
+| code | condition |
+| ---- | --------- |
 | 200 | PUT, GET Response Codes. This return code is permitted if a request was repeated due to a time-out. The response in that might be either a 200 or 201 code depending on the ASPSP implementation. The POST for a Funds request will also return 200 since it does not create a new resource. DELETE Response Code where a payment resource has been cancelled successfully and no further cancellation authorisation is required. |
 | 201 | POST response code where Payment Initiation or Consent Request was correctly performed. |
 | 202 | DELETE response code, where a payment resource can be cancelled in general, but where a cancellation authorisation is needed in addition. |
@@ -298,12 +298,7 @@ Give detailed information about the addressed account together with balance info
 | PSU-Accept-Language	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID	| header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$
+| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
