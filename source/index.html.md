@@ -25,8 +25,6 @@ search: true
 
 ## Available Enviroments (Environment URL)
 
-  * Documentation: <a href="https://developers.bankfrick.li" target="_blank" rel="noopener noreferrer">Documentation</a>
-
 ## Bank Frick
 
   * Production: <a href="https://olb.bankfrick.li/" target="_blank" rel="noopener noreferrer">https://olb.bankfrick.li</a>
@@ -66,7 +64,7 @@ It is based on the required account access APIs of the specifications of the EBA
 
 For retrieving account information and initiating payments by third-party providers (TPPs) endpoints are provided:
 
-Account Information Services (AIS)
+**Account Information Services (AIS)**
 
   * Account list of all PSD2 relevant user accounts, optionally with account balance
   * Details of the specified account (identifier, type, name, currency, etc.), optionally with account balance
@@ -79,29 +77,29 @@ Account Information Services (AIS)
   * Status information for a given Consent
   * Consent deletion for recurring account information access (optional)
 
-Payment Information Services (PIS)
+**Payment Information Services (PIS)**
 
   * Initiation of a payment
   * Detailed information on specified payment
   * Status information as to whether payment order has been accepted
   * Initiation of mass payments, scheduled payments, standing orders (incl. analog endpoints for detailed information, Status information) (if supported by the ASPSP)
 
-Confirmation of Funds (PIIS)
+**Confirmation of Funds (PIIS)**
 
   * Inquiry as to whether there is sufficient account coverage
 
-Signing Baskets Service (SBS) (if supported by the ASPSP)
+**Signing Baskets Service (SBS) (if supported by the ASPSP)**
 
   * Streamline authorisation process by grouping transactions
 
-Market Order Information Services (MIS) (if supported by the ASPSP)
+**Market Order Information Services (MIS) (if supported by the ASPSP)**
 
   *  Details of specified custody accounts
   *  Search for financial instruments, optionally with rating information
   *  Initiation and update of a market order request
   *  Status information of a market order*
 
-The APIs are
+**The APIs are**
 
   * via pre-defined standard interfaces and integration tools into the environment of the Bank uniformly implemented in the form of REST JSON APIs
   * with the defined Consent oriented on the standards of the Berlin Group available in the "embedded" or "decoupled" characteristic
