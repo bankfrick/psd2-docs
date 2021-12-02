@@ -2876,7 +2876,7 @@ Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred
 | ---------- | --------- | ----------- |
 | application/json | [StartScaprocessResponse] (JSON) |
 
-# GET /consents/{consentId}/authorisations/{authorisationId}
+## GET /consents/{consentId}/authorisations/{authorisationId}
 
 `GET /consents/{consentId}/authorisations/{authorisationId}`
 
@@ -2997,7 +2997,7 @@ This method returns the SCA status of a consent initiation's authorisation sub-r
 | ---------- | --------- | ----------- |
 | application/json | [ScaStatusResponse] (JSON) |
 
-# PUT /consents/{consentId}/authorisations/{authorisationId}
+## PUT /consents/{consentId}/authorisations/{authorisationId}
 
 `PUT /consents/{consentId}/authorisations/{authorisationId}`
 
@@ -3230,7 +3230,7 @@ There are the following request types on this access path:
 | ---------- | --------- | ----------- |
 | application/json | [AuthorisationUpdate] (JSON) |
 
-# GET /consents/{consentId}/status
+## GET /consents/{consentId}/status
 
 `GET /consents/{consentId}/status`
 
@@ -3350,7 +3350,7 @@ Read the status of an account information consent resource.
 | ---------- | --------- | ----------- |
 | application/json | [ConsentStatusResponse] (JSON) |
 
-# GET /custody-accounts
+## GET /custody-accounts
 
 `GET /custody-accounts`
 
@@ -3497,7 +3497,7 @@ Reads a list of custody accounts with additional information, e.g. rating inform
 | ---------- | --------- | ----------- |
 | application/json | [CustodyAccountList] (JSON) |
 
-# GET /custody-accounts/{account-id}
+## GET /custody-accounts/{account-id}
 
 `GET /custody-accounts/{account-id}`
 
@@ -3621,7 +3621,7 @@ Reads details about a custody account. It is assumed that a consent of the PSU t
 | ---------- | --------- | ----------- |
 | application/json | [CustodyAccountDetailsResponse] (JSON) |
 
-# GET /custody-accounts/{account-id}/balances
+## GET /custody-accounts/{account-id}/balances
 
 `GET /custody-accounts/{account-id}/balances`
 
@@ -3788,7 +3788,7 @@ The account-id is constant at least throughout the lifecycle of a given consent.
 | ---------- | --------- | ----------- |
 | application/json | [CustodyAccountBalanceResponse] (JSON) |
 
-# GET /custody-accounts/{account-id}/transactions
+## GET /custody-accounts/{account-id}/transactions
 
 `GET /custody-accounts/{account-id}/transactions`
 
@@ -4022,7 +4022,7 @@ For pending transactions, the relevant date is the entry date, which may not be 
 | application/json | [CustodyAccountTransactionsResponse] (JSON) |
 
 
-# GET /instruments
+## GET /instruments
 
 `GET /instruments`
 
@@ -4175,7 +4175,7 @@ Lookup a financial instrument.
 | application/json | [Instrument] (JSON) |
 
 
-# POST /instruments/search
+## POST /instruments/search
 
 `POST /instruments/search`
 
