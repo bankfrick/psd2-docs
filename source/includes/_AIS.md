@@ -284,7 +284,7 @@ Reads details about an account, with balances where required. It is assumed that
 
 Give detailed information about the addressed account.
 
-Give detailed information about the addressed account together with balance information
+Give detailed information about the addressed account together with balance information.
 
 **Request Parameters**
 
@@ -741,22 +741,12 @@ For a given account, additional parameters are e.g. the attributes "dateFrom" an
 | TPP-Signature-Certificate	 | header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
 | X-Request-ID | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | account-id | path | This identification is denoting the addressed account. The account-id is retrieved by using a "Read Account List" call. The account-id is the "id" attribute of the account structure. Its value is constant at least throughout the lifecycle of a given consent. | required |
-| bookingStatus | query | Permitted codes are "booked", "pending", "both" and "information".
-"booked" shall be supported by the ASPSP.
-To support the "pending" and "both" feature is optional for the ASPSP, Error code if not supported in the online banking frontend. If supported, "both" means to request transaction reports of transaction of bookingStatus either "pending" or "booked".
-To support the "information" feature is optional for the ASPSP. Currently the booking status "information" only covers standing orders. Error code if not supported. | required |
-| dateFrom | query | Conditional: Starting date (inclusive the date dateFrom) of the transaction list, mandated if no delta access is required.
-For booked transactions, the relevant date is the booking date.
-For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
-| dateTo | query | End date (inclusive the data dateTo) of the transaction list, default is "now" if not given.
-Might be ignored if a delta function is used.
-For booked transactions, the relevant date is the booking date.
-For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
+| bookingStatus | query | Permitted codes are "booked", "pending", "both" and "information". "Booked" shall be supported by the ASPSP. To support the "pending" and "both" feature is optional for the ASPSP, Error code if not supported in the online banking frontend. If supported, "both" means to request transaction reports of transaction of bookingStatus either "pending" or "booked". To support the "information" feature is optional for the ASPSP. Currently the booking status "information" only covers standing orders. Error code if not supported. | required |
+| dateFrom | query | Conditional: Starting date (inclusive the date dateFrom) of the transaction list, mandated if no delta access is required.For booked transactions, the relevant date is the booking date. For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
+| dateTo | query | End date (inclusive the data dateTo) of the transaction list, default is "now" if not given. Might be ignored if a delta function is used. For booked transactions, the relevant date is the booking date. For pending transactions, the relevant date is the entry date, which may not be transparent neither in this API nor other channels of the ASPSP. |
 | deltaList | query | This data attribute is indicating that the AISP is in favor to get all transactions after the last report access for this PSU on the addressed account. This is another implementation of a delta access-report. This delta indicator might be rejected by the ASPSP if this function is not supported. Optional if supported by API provider. | boolean |
-| entryReferenceFrom | query | This data attribute is indicating that the AISP is in favor to get all transactions after the transaction with identification entryReferenceFrom alternatively to the above defined period. This is a implementation of a delta access. If this data element is contained, the entries "dateFrom" and "dateTo" might be ignored by the ASPSP if a delta report is supported.
-Optional if supported by API provider. |
+| entryReferenceFrom | query | This data attribute is indicating that the AISP is in favor to get all transactions after the transaction with identification entryReferenceFrom alternatively to the above defined period. This is a implementation of a delta access. If this data element is contained, the entries "dateFrom" and "dateTo" might be ignored by the ASPSP if a delta report is supported. Optional if supported by API provider. |
 | withBalance | query | If contained, this function reads the list of accessible payment accounts including the booking balance, if granted by the PSU in the related consent and available by the ASPSP. This parameter might be ignored by the ASPSP. | boolean |
-
 
 **Response Codes**
 
