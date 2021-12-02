@@ -172,7 +172,8 @@ Remark: Note that the /consents endpoint optionally offers to grant an access on
   * POST
   * PUT
   * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$
+  * DELETE
+| regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent	| header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
