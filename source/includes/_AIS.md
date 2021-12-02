@@ -167,7 +167,7 @@ Remark: Note that the /consents endpoint optionally offers to grant an access on
 | PSU-Accept-Language	| header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID	| header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | 	regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$
-| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$
+| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP ddress field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent	| header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -298,7 +298,7 @@ Give detailed information about the addressed account together with balance info
 | PSU-Accept-Language	 | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID	| header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$
+| PSU-Http-Method	| header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
