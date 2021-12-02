@@ -12,8 +12,8 @@ toc_footers:
 
 includes:
   - AIS
-  - PIIS
   - MIS
+  - PIIS
   - PIS
   - SBS
   - Utility
@@ -25,8 +25,6 @@ search: true
 
 ## Available Enviroments (Environment URL)
 
-## Bank Frick
-
   * Production: <a href="https://olb.bankfrick.li/" target="_blank" rel="noopener noreferrer">https://olb.bankfrick.li</a>
   * Sandbox: <a href="https://olbtest.bankfrick.li/" target="_blank" rel="noopener noreferrer">https://olbtest.bankfrick.li</a>
   * Contact E-Mail: <a href="mailto:help@bankfrick.li">help@bankfrick.li</a>
@@ -36,9 +34,6 @@ The api will be available under the following path:
 BaseURL = <Environment URL>/xs2a/
 
 Schemes: https
-
-Please note that only the sandbox environment supports the example PSU-IDs, Passwords and IBANs mentioned under section Demo-Accounts.
-A valid QWAC certificate is required for all environments except for the Documentation.
 
 ## Registration
 
