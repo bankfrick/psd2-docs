@@ -267,12 +267,7 @@ For market order initiation with multilevel SCA, this specification requires an 
 | PSU-Corporate-ID-Type	| header | Might be mandated in the ASPSP's documentation. Only used in a corporate context. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-ID | header | Client ID of the PSU in the ASPSP client interface. Might be mandated in the ASPSP's documentation. Is not contained if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceeding AIS service in the same session. | required |
 | PSU-ID-Type	| header | Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility. |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
@@ -281,39 +276,15 @@ For market order initiation with multilevel SCA, this specification requires an 
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
 | TPP-Brand-Logging-Information | header | This header might be used by TPPs to inform the ASPSP about the brand used by the TPP towards the PSU.
 This information is meant for logging entries to enhance communication between ASPSP and PSU or ASPSP and TPP. This header might be ignored by the ASPSP. |
-| TPP-Explicit-Authorisation-Preferred | header | If it equals "true", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.
-If it equals "false" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket. | boolean |
+| TPP-Explicit-Authorisation-Preferred | header | If it equals "true", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.If it equals "false" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket. | boolean |
 | TPP-Nok-Redirect-URI | header | If this URI is contained, the TPP is asking to redirect the transaction flow to this address instead of the TPP-Redirect-URI in case of a negative result of the redirect SCA method. This might be ignored by the ASPSP. |
-| TPP-Notification-Content-Preferred | header | The string has the form
-status=X1, ..., Xn
-
-where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics:
-
-SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP.
-
-PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP.
-
-LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP.
-
-This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
-| TPP-Notification-URI | header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP.
-For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies:
-
-URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant.
-
-Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
+| TPP-Notification-Content-Preferred | header | The string has the form status=X1, ..., Xn where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics: SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP. PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP. LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP. This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
+| TPP-Notification-URI | header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP. For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies: URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant. Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
 | TPP-Redirect-Preferred | header | If it equals "true", the TPP prefers a redirect over an embedded SCA approach. If it equals "false", the TPP prefers not to be redirected for SCA. The ASPSP will then choose between the Embedded or the Decoupled SCA approach, depending on the choice of the SCA procedure by the TPP/PSU. If the parameter is not used, the ASPSP will choose the SCA approach to be applied depending on the SCA method chosen by the TPP/PSU. | boolean |
-| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect.
-Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field.
-
-**Remark for Future:** This field might be changed to mandatory in the next version of the specification. |
+| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect. Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field. **Remark for Future:** This field might be changed to mandatory in the next version of the specification. |
 | TPP-Signature-Certificate	| header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
 | X-Request-ID	| header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
-| TPP-Rejection-NoFunds-Preferred	| path | If it equals "true" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.
-
-If it equals "false" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.
-
-This parameter might be ignored by the ASPSP. | boolean |
+| TPP-Rejection-NoFunds-Preferred	| path | If it equals "true" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available. If it equals "false" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment. This parameter might be ignored by the ASPSP. | boolean |
 
 **Response Codes**
 
@@ -347,30 +318,12 @@ This parameter might be ignored by the ASPSP. | boolean |
 
 | name | description |
 | ---- | ----------- |
-| ASPSP-Notification-Support | true if the ASPSP supports resource status notification services.
-
-false if the ASPSP supports resource status notification in general, but not for the current request.
-
-Not used, if resource status notification services are generally not supported by the ASPSP.
-
-Shall be supported if the ASPSP supports resource status notification services. |
+| ASPSP-Notification-Support | true if the ASPSP supports resource status notification services. false if the ASPSP supports resource status notification in general, but not for the current request. Not used, if resource status notification services are generally not supported by the ASPSP. Shall be supported if the ASPSP supports resource status notification services. |
 | X-Request-ID | ID of the request, unique to the call, as determined by the initiating party. |
 | Trading-Hours	| In case the order is made outside of the regular trading hours, this field contains information about the ASPSP trading hours. |
 | ASPSP-SCA-Approach | This data element must be contained, if the SCA Approach is already fixed. Possible values are EMBEDDED, DECOUPLED, REDIRECT. The OAuth SCA approach will be subsumed by REDIRECT. |
-| ASPSP-Notification-Content | The string has the form
-status=X1, …, Xn
-where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated.
-The usage of the constants supports the following semantics
-SCA - Notification on every change of the scaStatus attribute for all related authorisation processes is provided by the ASPSP for the related resource.
-PROCESS - Notification on all changes of consentStatus or transactionStatus attributes is provided by the ASPSP for the related resource
-LAST - Notification on the last consentStatus or transactionStatus as available in the XS2A interface is provided by the ASPSP for the related resource.
-This field must be provided if the ASPSP-Notification-Support=true. The ASPSP might consider the notification content as preferred by the TPP, but can also respond independently of the preferred request. |
-| MiFID-Confirmation-Required | In case the order requires mifid confirmation, the header contains a list of customer depots that require MiFID confirmation for the order within the start authorization process. The string has the form
-{bban}=(RISK_CLASSIFICATION|KNOWLEDGE)
-comma separated for each custody account.
-The constants have the following semantics:
-RISK_CLASSIFICATION - Verification of the risk profile of the customer compared to the instrument risk of the securities.
-KNOWLEDGE - Verification of the product knowledge of the customer. The confirmation must be given when the marketorder is being authorised. |
+| ASPSP-Notification-Content | The string has the form status=X1, …, Xn where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the following semantics: SCA - Notification on every change of the scaStatus attribute for all related authorisation processes is provided by the ASPSP for the related resource. PROCESS - Notification on all changes of consentStatus or transactionStatus attributes is provided by the ASPSP for the related resource. LAST: - Notification on the last consentStatus or transactionStatus as available in the XS2A interface is provided by the ASPSP for the related resource. This field must be provided if the ASPSP-Notification-Support=true. The ASPSP might consider the notification content as preferred by the TPP, but can also respond independently of the preferred request. |
+| MiFID-Confirmation-Required | In case the order requires mifid confirmation, the header contains a list of customer depots that require MiFID confirmation for the order within the start authorization process. The string has the form {bban}=(RISK_CLASSIFICATION|KNOWLEDGE) comma separated for each custody account. The constants have the following semantics: RISK_CLASSIFICATION - Verification of the risk profile of the customer compared to the instrument risk of the securities. KNOWLEDGE - Verification of the product knowledge of the customer. The confirmation must be given when the marketorder is being authorised. |
 | Location | Location of the created resource. |
 
 
@@ -457,12 +410,7 @@ The response to this DELETE command will tell the TPP whether the
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -578,12 +526,7 @@ Returns the content of a market order object.
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -626,12 +569,7 @@ Returns the content of a market order object.
 | ---- | ----------- |
 | X-Request-ID | ID of the request, unique to the call, as determined by the initiating party. |
 | Trading-Hours	| In case the order is made outside of the regular trading hours, this field contains information about the ASPSP trading hours. |
-| MiFID-Confirmation-Required	| In case the order requires mifid confirmation, the header contains a list of customer depots that require MiFID confirmation for the order within the start authorization process. The string has the form
-{bban}=(RISK_CLASSIFICATION|KNOWLEDGE)
-comma separated for each custody account.
-The constants have the following semantics:
-RISK_CLASSIFICATION - Verification of the risk profile of the customer compared to the instrument risk of the securities.
-KNOWLEDGE - Verification of the product knowledge of the customer. The confirmation must be given when the marketorder is being authorised. |
+| MiFID-Confirmation-Required	| In case the order requires mifid confirmation, the header contains a list of customer depots that require MiFID confirmation for the order within the start authorization process. The string has the form {bban}=(RISK_CLASSIFICATION|KNOWLEDGE) comma separated for each custody account. The constants have the following semantics: RISK_CLASSIFICATION - Verification of the risk profile of the customer compared to the instrument risk of the securities. KNOWLEDGE - Verification of the product knowledge of the customer. The confirmation must be given when the marketorder is being authorised. |
 
 ## GET /market-orders/{marketorderId}/authorisations
 
@@ -710,12 +648,7 @@ Read a list of all authorisation subresources IDs which have been created. This 
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -959,40 +892,16 @@ This applies in the following scenarios:
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
 | TPP-Nok-Redirect-URI | header | If this URI is contained, the TPP is asking to redirect the transaction flow to this address instead of the TPP-Redirect-URI in case of a negative result of the redirect SCA method. This might be ignored by the ASPSP. |
-| TPP-Notification-Content-Preferred | header | The string has the form
-status=X1, ..., Xn
-
-where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics:
-
-SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP.
-
-PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP.
-
-LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP.
-
-This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
-| TPP-Notification-URI	| header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP.
-For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies:
-
-URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant.
-
-Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
+| TPP-Notification-Content-Preferred | header | The string has the form status=X1, ..., Xn where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics: SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP. PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP. LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP. This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
+| TPP-Notification-URI	| header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP. For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies: URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant. Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
 | TPP-Redirect-Preferred	| header | If it equals "true", the TPP prefers a redirect over an embedded SCA approach. If it equals "false", the TPP prefers not to be redirected for SCA. The ASPSP will then choose between the Embedded or the Decoupled SCA approach, depending on the choice of the SCA procedure by the TPP/PSU. If the parameter is not used, the ASPSP will choose the SCA approach to be applied depending on the SCA method chosen by the TPP/PSU. | boolean |
-| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect.
-Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field.
-
-**Remark for Future:** This field might be changed to mandatory in the next version of the specification.
+| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect. Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field. **Remark for Future:** This field might be changed to mandatory in the next version of the specification. 
 | TPP-Signature-Certificate	| header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
 | X-Request-ID | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | marketorderId | path | Resource identification of the generated market order initiation resource. | required |
@@ -1120,12 +1029,7 @@ For DECOUPLED SCA approach, calling this method will check if the PSU has approv
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -1365,12 +1269,7 @@ There are the following request types on this access path:
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-ID | header | Client ID of the PSU in the ASPSP client interface. Might be mandated in the ASPSP's documentation. Is not contained if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceeding AIS service in the same session. |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
@@ -1491,12 +1390,7 @@ Retrieve a list of all created cancellation authorisation sub-resources.
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -1726,40 +1620,16 @@ This applies in the following scenarios:
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
 | TPP-Nok-Redirect-URI | header | If this URI is contained, the TPP is asking to redirect the transaction flow to this address instead of the TPP-Redirect-URI in case of a negative result of the redirect SCA method. This might be ignored by the ASPSP. |
-| TPP-Notification-Content-Preferred | header | The string has the form
-status=X1, ..., Xn
-
-where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics:
-
-SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP.
-
-PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP.
-
-LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP.
-
-This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
-| TPP-Notification-URI | header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP.
-For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies:
-
-URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant.
-
-Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
+| TPP-Notification-Content-Preferred | header | The string has the form status=X1, ..., Xn where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics: SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP. PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP. LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP. This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
+| TPP-Notification-URI | header | URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent. This header field may by ignored by the ASPSP. For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies: URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant. Wildcard definitions shall be taken into account for compliance checks by the ASPSP. ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply. |
 | TPP-Redirect-Preferred | header | If it equals "true", the TPP prefers a redirect over an embedded SCA approach. If it equals "false", the TPP prefers not to be redirected for SCA. The ASPSP will then choose between the Embedded or the Decoupled SCA approach, depending on the choice of the SCA procedure by the TPP/PSU. If the parameter is not used, the ASPSP will choose the SCA approach to be applied depending on the SCA method chosen by the TPP/PSU. | boolean |
-| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect.
-Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field.
-
-**Remark for Future:** This field might be changed to mandatory in the next version of the specification. |
+| TPP-Redirect-URI | header | URI of the TPP, where the transaction flow shall be redirected to after a Redirect. Mandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals "true". It is recommended to always use this header field. **Remark for Future:** This field might be changed to mandatory in the next version of the specification. |
 | TPP-Signature-Certificate	| header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
 | X-Request-ID | header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | marketorderId | path | Resource identification of the generated market order initiation resource. | required |
@@ -1886,12 +1756,7 @@ For DECOUPLED SCA approach, calling this method will check if the PSU has approv
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
@@ -2118,12 +1983,7 @@ There are the following request types on this access path:
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-ID | header | Client ID of the PSU in the ASPSP client interface. Might be mandated in the ASPSP's documentation. Is not contained if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceeding AIS service in the same session. |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
@@ -2238,12 +2098,7 @@ Check the transaction status of a market order initiation.
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-IP-Address | header | The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request. | required |
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
