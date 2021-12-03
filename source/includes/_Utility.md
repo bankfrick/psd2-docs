@@ -95,7 +95,7 @@ Content-Type: application/json
 {
   "systemMessages" : [ {
     "topic" : "Maintenance Information",
-    "message" : "<p>Due to maintenance work, online banking will not be available between <b>05:00 to 06:00</b>.</p>",
+    "message" : "Due to maintenance work, online banking will not be available between 05:00 to 06:00.",
     "lastChange" : "..."
   }, {
     "topic" : "...",
@@ -120,12 +120,7 @@ Not supported by all ASPSPs.
 | PSU-Accept-Language | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Device-ID | header | UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available. UUID identifies either a device or a device dependant application installation. In case of an installation identification this ID need to be unaltered until removal from device. | regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | PSU-Geo-Location | header | The forwarded Geo Location of the corresponding http request between PSU and TPP if available. | regex: ^GEO:([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$ |
-| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are:
-  * GET
-  * POST
-  * PUT
-  * PATCH
-  * DELETE | regex: ^(GET|POST|PUT|PATCH|DELETE)$ |
+| PSU-Http-Method | header | HTTP method used at the PSU ? TPP interface, if available. Valid values are: GET, POST, PUT, PATCH, DELETE | regex: ^(GET/POST/PUT/PATCH/DELETE)$ |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | X-Request-ID	| header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 
