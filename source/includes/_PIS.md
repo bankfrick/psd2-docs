@@ -1961,8 +1961,7 @@ Check the transaction status of a payment initiation.
 
 | name | type | description | constraints |
 | ---- | ---- | ----------- | ----------- |
-| Accept | header | The TPP can indicate the formats of status reports supported together with a prioritisation following the HTTP header definition. The formats supported by this specification are `xml` and `JSON`.
-If only one format is supported by the TPP, which is not supported by the ASPSP this can lead to a rejection of the request. |
+| Accept | header | The TPP can indicate the formats of status reports supported together with a prioritisation following the HTTP header definition. The formats supported by this specification are `xml` and `JSON`. If only one format is supported by the TPP, which is not supported by the ASPSP this can lead to a rejection of the request. |
 | Digest | header | Is contained if and only if the "Signature" element is contained in the header of the request. |
 | PSU-Accept | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
 | PSU-Accept-Charset | header	| The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
