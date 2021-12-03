@@ -247,8 +247,7 @@ For payment initiation with multilevel SCA, this specification requires an expli
 | PSU-IP-Port	| header | The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available. |
 | PSU-User-Agent | header | The forwarded Agent header field of the HTTP request between PSU and TPP, if available. |
 | Signature | header | A signature of the request by the TPP on application level. This might be mandated by ASPSP. |
-| TPP-Brand-Logging-Information | header | This header might be used by TPPs to inform the ASPSP about the brand used by the TPP towards the PSU.
-This information is meant for logging entries to enhance communication between ASPSP and PSU or ASPSP and TPP. This header might be ignored by the ASPSP. |
+| TPP-Brand-Logging-Information | header | This header might be used by TPPs to inform the ASPSP about the brand used by the TPP towards the PSU. This information is meant for logging entries to enhance communication between ASPSP and PSU or ASPSP and TPP. This header might be ignored by the ASPSP. |
 | TPP-Explicit-Authorisation-Preferred | header | If it equals "true", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality. If it equals "false" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket. | boolean |
 | TPP-Nok-Redirect-URI | header | If this URI is contained, the TPP is asking to redirect the transaction flow to this address instead of the TPP-Redirect-URI in case of a negative result of the redirect SCA method. This might be ignored by the ASPSP. |
 | TPP-Notification-Content-Preferred | header | The string has the form status=X1, ..., Xn where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated. The usage of the constants supports the of following semantics: SCA: A notification on every change of the scaStatus attribute for all related authorisation processes is preferred by the TPP. PROCESS: A notification on all changes of consentStatus or transactionStatus attributes is preferred by the TPP. LAST: Only a notification on the last consentStatus or transactionStatus as available in the XS2A interface is preferred by the TPP. This header field may be ignored, if the ASPSP does not support resource notification services for the related TPP. |
@@ -258,20 +257,8 @@ This information is meant for logging entries to enhance communication between A
 | TPP-Signature-Certificate	| header | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is contained. |
 | X-Request-ID	| header | ID of the request, unique to the call, as determined by the initiating party. | required, regex: ^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ |
 | TPP-Rejection-NoFunds-Preferred	| path | If it equals "true" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available. If it equals "false" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment. This parameter might be ignored by the ASPSP. | boolean |
-| payment-product | path | The addressed payment product endpoint, e.g. for SEPA Credit Transfers (SCT). The ASPSP will publish which of the payment products/endpoints will be supported. Possible values are depending on the support of the ASPSP:
-  * sepa-credit-transfers
-  * instant-sepa-credit-transfers
-  * target-2-payments
-  * cross-border-credit-transfers
-  * pain.001-sepa-credit-transfers
-  * pain.001-instant-sepa-credit-transfers
-  * pain.001-target-2-payments
-  * pain.001-cross-border-credit-transfers
-**Remark:** For all SEPA Credit Transfer based endpoints which accept XML encoding, the XML pain.001 schemes provided by EPC are supported by the ASPSP as a minimum for the body content. Further XML schemes might be supported by some communities. **Remark:** For cross-border and TARGET-2 payments only community wide pain.001 schemes do exist. There are plenty of country specific scheme variants. |
-| payment-service | path | Payment Service Possible values are depending on the support of the ASPSP:
-  * payments
-  * bulk-payments
-  * periodic-payments |
+| payment-product | path | The addressed payment product endpoint, e.g. for SEPA Credit Transfers (SCT). The ASPSP will publish which of the payment products/endpoints will be supported. Possible values are depending on the support of the ASPSP: `sepa-credit-transfers`, `instant-sepa-credit-transfers`, `target-2-payments`, `cross-border-credit-transfers`, `pain.001-sepa-credit-transfers`, `pain.001-instant-sepa-credit-transfers`, `pain.001-target-2-payments`, `pain.001-cross-border-credit-transfers` **Remark:** For all SEPA Credit Transfer based endpoints which accept XML encoding, the XML pain.001 schemes provided by EPC are supported by the ASPSP as a minimum for the body content. Further XML schemes might be supported by some communities. **Remark:** For cross-border and TARGET-2 payments only community wide pain.001 schemes do exist. There are plenty of country specific scheme variants. |
+| payment-service | path | Payment Service Possible values are depending on the support of the ASPSP: `payments`, `bulk-payments`, `periodic-payments` |
 
 **Response Codes**
 
