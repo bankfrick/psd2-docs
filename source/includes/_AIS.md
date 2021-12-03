@@ -724,7 +724,7 @@ For a given account, additional parameters are e.g. the attributes "dateFrom" an
 
 | name | type | description | constraints |
 | ---- | ---- | ----------- | ----------- |
-| Accept | header | The TPP can indicate the formats of account reports supported together with a priorisation following the HTTP header definition. The formats supported by this specification are **xml/JSON/text.** **Remark:** Content types might be extended in the next version of the specification. This shall enable the TPP to address different camt.05x versions or different MT94x versions in a corporate context. The TPP then could e.g. say: "I prefer MT942, but take MT940 if MT942 is not available." | |
+| Accept | header | The TPP can indicate the formats of account reports supported together with a priorisation following the HTTP header definition. The formats supported by this specification are `xml/JSON/text`. **Remark:** Content types might be extended in the next version of the specification. This shall enable the TPP to address different camt.05x versions or different MT94x versions in a corporate context. The TPP then could e.g. say: "I prefer MT942, but take MT940 if MT942 is not available." | |
 | Consent-ID | header | This then contains the consentId of the related AIS consent, which was performed prior to accessing this account. | required |
 | Digest | header | Is contained if and only if the "Signature" element is contained in the header of the request. |
 | PSU-Accept | header | The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available. |
