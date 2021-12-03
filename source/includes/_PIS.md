@@ -194,7 +194,7 @@ This method is used to initiate a payment at the ASPSP.
 
 **Variants of Payment Initiation Requests**
 
-This method to initiate a payment initiation at the ASPSP can be sent with either a JSON body or an pain.001 body depending on the payment product in the path.
+This method to initiate a payment initiation at the ASPSP can be sent with either a `JSON` body or an `pain.001` body depending on the payment product in the path.
 
 There are the following payment products:
 
