@@ -298,13 +298,7 @@ For payment initiation with multilevel SCA, this specification requires an expli
 
 | name | description |
 | ---- | ----------- |
-| ASPSP-Notification-Support | true if the ASPSP supports resource status notification services.
-
-false if the ASPSP supports resource status notification in general, but not for the current request.
-
-Not used, if resource status notification services are generally not supported by the ASPSP.
-
-Shall be supported if the ASPSP supports resource status notification services. |
+| ASPSP-Notification-Support | true if the ASPSP supports resource status notification services. False if the ASPSP supports resource status notification in general, but not for the current request. Not used, if resource status notification services are generally not supported by the ASPSP. Shall be supported if the ASPSP supports resource status notification services. |
 | X-Request-ID | ID of the request, unique to the call, as determined by the initiating party. |
 | Trading-Hours	| In case the order is made outside of the regular trading hours, this field contains information about the ASPSP trading hours. |
 | ASPSP-SCA-Approach | This data element must be contained, if the SCA Approach is already fixed. Possible values are EMBEDDED, DECOUPLED, REDIRECT. The OAuth SCA approach will be subsumed by REDIRECT. |
