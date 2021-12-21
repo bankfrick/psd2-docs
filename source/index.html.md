@@ -33,7 +33,7 @@ The api will be available under the following path:
 
 BaseURL = <Environment URL>/xs2a/
 
-Schemes: https
+Schemes: https...
 
 ## Registration
 
